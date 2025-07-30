@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahrenheit to Celsius Converter</title>
+    <style>
+        :root {
+            --primary: #00b894;
+            --secondary: #0984e3;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --text-dark: #2d3436;
+            --text-light: #f5f6fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .converter-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 350px;
+            text-align: center;
+            transition: transform 0.4s ease;
+        }
+
+        .converter-container:hover {
+            transform: translateY(-10px);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .formula {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            color: var(--dark);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.2);
+        }
+
+        button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 10px;
+            font-size: 18px;
+            display: none;
+            animation: fadeIn 0.6s ease;
+            border-left: 5px solid var(--secondary);
+        }
+
+        .temperature-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .unit {
+            font-size: 14px;
+            color: #636e72;
+            vertical-align: super;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="converter-container">
+        <h1>Fahrenheit to Celsius Converter</h1>
+        <div class="formula">
+            ℃ = (℉ - 32) ÷ 1.8
+        </div>
+        
+        <div class="input-group">
+            <label for="fahrenheit">Temperature in Fahrenheit:</label>
+            <input type="number" id="fahrenheit" placeholder="Enter temperature in ℉" step="0.1">
+        </div>
+        
+        <button onclick="convertTemperature()">Convert</button>
+        <div id="error" class="error"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Function to convert Fahrenheit to Celsius (return type with argument)
+        function fahrenheitToCelsius(fahrenheit) {
+            return (fahrenheit - 32) / 1.8;
+        }
+
+        // Main function to handle the conversion
+        function convertTemperature() {
+            // Get input value
+            const fahrenheit = parseFloat(document.getElementById('fahrenheit').value);
+            
+            // Hide previous results/errors
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            
+            // Validate input
+            if (isNaN(fahrenheit)) {
+                showError("Please enter a valid temperature");
+                return;
+            }
+            
+            // Calculate Celsius using our function
+            const celsius = fahrenheitToCelsius(fahrenheit);
+            
+            // Display result
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `
+                <div>${fahrenheit.toFixed(1)}<span class="unit">℉</span> equals</div>
+                <div class="temperature-value">${celsius.toFixed(1)}<span class="unit">℃</span></div>
+                <div style="margin-top: 10px; font-size: 14px; color: #666;">
+                    Calculation: (${fahrenheit.toFixed(1)} - 32) ÷ 1.8 = ${celsius.toFixed(1)}
+                </div>
+            `;
+            resultElement.style.display = 'block';
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

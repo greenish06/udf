@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate ((b*b)-(4*a*c))/(2*a)</title>
+
+    <link rel="stylesheet" href="css/5.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f1f1f1;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 60px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calc-container">
+        <h2>Calculate ((b*b)-(4*a*c))/(2*a)</h2>
+        <label for="a">Enter a:</label>
+        <input type="number" id="a" required>
+        <label for="b">Enter b:</label>
+        <input type="number" id="b" required>
+        <label for="c">Enter c:</label>
+        <input type="number" id="c" required>
+        <button onclick="calculateExpression()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+
+        function calculateExpression() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+            const resultDiv = document.getElementById('result');
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                resultDiv.textContent = "Please enter valid numbers for all fields.";
+                return;
+            }
+            if (a === 0) {
+                resultDiv.textContent = "'a' cannot be zero (division by zero is not allowed).";
+                return;
+            }
+            const result = ((b * b) - (4 * a * c)) / (2 * a);
+            resultDiv.textContent = "Result: " + result;
+        }
+    </script>
+
+</body>
+
+</html>

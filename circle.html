@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Circle Area Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #83a4d4, #b6fbff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin: 15px 0;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #007bff;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #222;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <h2>Circle Area Calculator</h2>
+        <input type="number" id="radius" placeholder="Enter radius" min="0" step="any">
+        <br>
+        <button onclick="displayArea()">Calculate Area</button>
+        <div class="result" id="output"></div>
+    </div>
+
+    <script>
+        // Function with argument and return type
+        function calculateArea(radius) {
+            const pi = Math.PI;
+            return pi * radius * radius;
+        }
+
+        // Display the result
+        function displayArea() {
+            const r = parseFloat(document.getElementById("radius").value);
+            const resultBox = document.getElementById("output");
+
+            if (isNaN(r) || r <= 0) {
+                resultBox.textContent = "Please enter a valid positive radius.";
+                return;
+            }
+
+            const area = calculateArea(r);
+            resultBox.textContent = `Area of Circle = ${area.toFixed(2)} units²`;
+        }
+    </script>
+
+</body>
+
+</html>

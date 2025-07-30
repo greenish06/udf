@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Triangle Area Calculator</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #a1c4fd, #c2e9fb 70%);
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: #fff;
+      padding: 2.5rem 2rem;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.2);
+      text-align: center;
+      min-width: 320px;
+    }
+    h2 {
+      margin-bottom: 1.8rem;
+      color: #2563eb;
+      letter-spacing: 1px;
+    }
+    input[type="number"] {
+      width: 60px;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #90cdf4;
+      margin: 0.5rem;
+      font-size: 1rem;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="number"]:focus {
+      border-color: #3182ce;
+      box-shadow: 0 0 4px #a1c4fd88;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.6rem 2.5rem;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+    }
+    .result {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      color: #2563eb;
+      font-weight: bold;
+      min-height: 1.5rem;
+    }
+    .label {
+      color: #1e293b;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Triangle Area Calculator</h2>
+    <div>
+      <label class="label">Base&nbsp;(l):</label>
+      <input type="number" id="base" min="0" step="any" placeholder="Base">
+    </div>
+    <div>
+      <label class="label">Height&nbsp;(h):</label>
+      <input type="number" id="height" min="0" step="any" placeholder="Height">
+    </div>
+    <button onclick="showArea()">Calculate Area</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // Function with arguments and return type to calculate triangle area
+    function triangleArea(base, height) {
+      return (base * height) / 2;
+    }
+
+    function showArea() {
+      const base = parseFloat(document.getElementById('base').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(base) || isNaN(height) || base <= 0 || height <= 0) {
+        resultDiv.style.color = '#dc2626';
+        resultDiv.textContent = 'Please enter valid positive numbers!';
+        return;
+      }
+
+      const area = triangleArea(base, height);
+      resultDiv.style.color = '#2563eb';
+      resultDiv.textContent = `Area = ${(area).toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>

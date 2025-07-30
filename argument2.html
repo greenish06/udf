@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate (a*a) + (2*a*b) + (b*b)</title>
+
+    <link rel="stylesheet" href="css/6.css">
+
+    <style>
+        body {
+            background: #3F5EFB;
+background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+            font-family: Arial, sans-serif;
+            padding: 20px 0;
+        }
+
+        .container {
+            background:black;
+            max-width: 340px;
+            margin: 50px auto;
+            padding: 28px 22px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px #0002;
+        }
+
+        h2 {
+            text-align: center;
+            color: #b6bcce;
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 6px;
+            color: #b6bcce;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid #b3bfd1;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background: #C5B0CD;
+            color: #fff;
+            border: solid;
+            border-radius: 10px;
+            font-size: 1rem;
+            padding: 9px 0;
+            cursor: pointer;
+            margin-top: 3px;
+        }
+
+        button:hover {
+            background: #1d4875;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 10px;
+            color: #1a1f3b;
+            min-height: 1.4em;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Calculate (a*a) + (2*a*b) + (b*b)</h2>
+        <label for="a">Enter a:</label>
+        <input type="number" id="a" required>
+        <label for="b">Enter b:</label>
+        <input type="number" id="b" required>
+        <button onclick="calculate()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script src="js/6.js">
+        // Function with arguments and return type
+        function calculateExpression(a, b) {
+            return (a * a) + (2 * a * b) + (b * b);
+        }
+
+        function calculate() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const resultDiv = document.getElementById('result');
+            if (isNaN(a) || isNaN(b)) {
+                resultDiv.textContent = "Please enter valid numbers for both a and b.";
+                return;
+            }
+            const result = calculateExpression(a, b);
+            resultDiv.textContent = "Result: " + result;
+        }
+    </script>
+
+</body>
+
+</html>

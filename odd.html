@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odd or Even Checker</title>
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --odd: #e74c3c;
+            --even: #2ecc71;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .checker-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 350px;
+            text-align: center;
+            transition: transform 0.4s ease;
+        }
+
+        .checker-container:hover {
+            transform: translateY(-10px);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+        }
+
+        button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+            background-size: 200% auto;
+        }
+
+        button:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            display: none;
+            animation: fadeIn 0.6s ease;
+            font-weight: 700;
+        }
+
+        .odd-result {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--odd);
+            border-left: 5px solid var(--odd);
+        }
+
+        .even-result {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--even);
+            border-left: 5px solid var(--even);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .number-display {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="checker-container">
+        <h1>Odd or Even Number Checker</h1>
+        
+        <div class="input-group">
+            <label for="number">Enter a number:</label>
+            <input type="number" id="number" placeholder="Enter any integer" step="1">
+        </div>
+        
+        <button onclick="checkOddEven()">Check Number</button>
+        <div id="error" class="error"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Function to check if number is odd or even (with argument, no return type)
+        function checkNumber(num) {
+            const resultElement = document.getElementById('result');
+            
+            // Clear previous result
+            resultElement.style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            
+            // Validate input
+            if (isNaN(num)) {
+                showError("Please enter a valid number");
+                return;
+            }
+            
+            // Check if the number is integer
+            if (!Number.isInteger(num)) {
+                showError("Please enter an integer (whole number)");
+                return;
+            }
+            
+            // Determine if odd or even
+            if (num % 2 === 0) {
+                resultElement.innerHTML = `
+                    <div class="number-display">${num}</div>
+                    <div>is an <strong>EVEN</strong> number</div>
+                `;
+                resultElement.className = 'even-result';
+            } else {
+                resultElement.innerHTML = `
+                    <div class="number-display">${num}</div>
+                    <div>is an <strong>ODD</strong> number</div>
+                `;
+                resultElement.className = 'odd-result';
+            }
+            
+            resultElement.style.display = 'block';
+        }
+
+        // Main function to handle the button click
+        function checkOddEven() {
+            const num = parseFloat(document.getElementById('number').value);
+            checkNumber(num); // Call our function with argument
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        +
+    </script>
+</body>
+</html>
